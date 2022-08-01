@@ -1,90 +1,100 @@
 -- Query tạo database
+DROP DATABASE IF EXISTS assingment1;
 CREATE DATABASE assingment1;
-
 -- Query sử dụng database
 USE assingment1;
-
--- Query tạo bảng tên là Deparment
-CREATE TABLE Deparment (
-	deparment_id		INT PRIMARY KEY AUTO_INCREMENT,
-    deparment_name		VARCHAR(100)
+-- Query tạo bảng 1 tên là Deparment
+DROP TABLE IF EXISTS Department;
+CREATE TABLE  Department (
+	DepartmentID			INT PRIMARY KEY AUTO_INCREMENT,
+    DepartmentName			VARCHAR(100) NOT NULL
 );
-
--- Query tạo bảng tên là Position
+-- Query tạo bảng 2 tên là Position
+DROP TABLE IF EXISTS Position;
 CREATE TABLE Position (
-	position_id			INT PRIMARY KEY AUTO_INCREMENT,
-    position_name		VARCHAR(50)
+	PositionID				INT PRIMARY KEY AUTO_INCREMENT,
+    PositionName			ENUM ('Dev','Test','Scrum Master','PM')
 );
-
--- Query tạo bảng tên là Account
+-- Query tạo bảng 3 tên là Account
+DROP TABLE IF EXISTS `Account`;
 CREATE TABLE `Account` (
-	account_id			INT PRIMARY KEY AUTO_INCREMENT,
-    email				VARCHAR(255),
-    user_name			VARCHAR(100),
-    full_name			VARCHAR(255),
-    deparmen_id			INT,
-    position_id			INT,
-    create_date			DATE
+	AccountID				INT PRIMARY KEY AUTO_INCREMENT,
+    Email					VARCHAR(255),
+    Username				VARCHAR(100), 
+    FullName				VARCHAR(255) NOT NULL,
+    DepartmentID			INT,
+    PositionID				INT,
+    CreateDate				DATETIME,
+    CONSTRAINT fk_Department FOREIGN KEY (DepartmentID) REFERENCES Department (DepartmentID),
+    CONSTRAINT fk_Position   FOREIGN KEY (PositionID)	REFERENCES Position (PositionID)
 );
-
--- Query tạo bảng tên là Groupp
+-- Query tạo bảng 4 tên  là Groupp
+DROP TABLE IF EXISTS `Group`;
 CREATE TABLE `Group` (
-	group_id		INT PRIMARY KEY AUTO_INCREMENT,
-    group_name		VARCHAR(255),
-    creator_id		INT,
-    create_date		DATE
+	GroupID					INT PRIMARY KEY AUTO_INCREMENT,
+    GroupName				VARCHAR(255) NOT NULL,
+    CreatorID				INT,
+    CreateDate				DATE
 );
-
--- Query tạo bảng tên là GroupAccount
+-- Query tạo bảng 5 tên  là GroupAccount
+DROP TABLE IF EXISTS GroupAccount;
 CREATE TABLE GroupAccount (
-	group_id		INT PRIMARY KEY AUTO_INCREMENT,
-    account_id		INT,
-    join_date		DATE
+	GroupID					INT,
+    AccountID				INT,
+    JoinDate				DATE,
+    CONSTRAINT fk_Account FOREIGN KEY (AccountID) 	REFERENCES `Account` (AccountID),
+    CONSTRAINT fk_GroupID FOREIGN KEY (GroupID)		REFERENCES `Group` (GroupID)
 );
-
--- Query tạo bảng tên là TypeQuestion
+-- Query tạo bảng 6 tên  là TypeQuestion
+DROP TABLE IF EXISTS TypeQuestion;
 CREATE TABLE TypeQuestion (
-	type_id			INT PRIMARY KEY AUTO_INCREMENT,
-    type_name		VARCHAR(50)
+	TypeID					INT PRIMARY KEY AUTO_INCREMENT,
+    TypeName				ENUM('Essay','Multiple-Choice')
 );
-
--- Query tạo bảng tên là CategogyQuestion
-CREATE TABLE CategogyQuestion (
-	categogy_id		INT PRIMARY KEY AUTO_INCREMENT,
-    catelogy_name	VARCHAR(50)
+-- Query tạo bảng 7 tên là CategogyQuestion
+DROP TABLE IF EXISTS CategoryQuestion;
+CREATE TABLE CategoryQuestion (
+	CategoryID				INT PRIMARY KEY AUTO_INCREMENT,
+    CategoryName			VARCHAR(50) NOT NULL
 );
-
--- Query tạo bảng mang tên Question
+-- Query tạo bảng 8 mang tên Question
+DROP TABLE IF EXISTS Question;
 CREATE TABLE Question (
-	question_id		INT PRIMARY KEY AUTO_INCREMENT,
-    content			VARCHAR(6555),
-    categogy_id		INT,
-    type_id			INT,
-    creator_id		INT,
-    creator_date	DATE
+	QuestionID				INT PRIMARY KEY AUTO_INCREMENT,
+    Content					VARCHAR(655) NOT NULL,
+    CategoryID				INT,
+    TypeID					INT,
+    CreatorID				INT,
+    CreateDate				DATE,
+	CONSTRAINT fk_TypeQuestion FOREIGN KEY (TypeID) REFERENCES TypeQuestion (TypeID)
 );
-
--- Query tạo bảng tên là Answer
+-- Query tạo bảng 9 tên là Answer
+DROP TABLE IF EXISTS Answer;
 CREATE TABLE Answer (
-	answer_id		INT PRIMARY KEY AUTO_INCREMENT,
-    content			VARCHAR(6555),
-    question_id		INT,
-    is_correct		VARCHAR(50)
+	AnswerID				INT PRIMARY KEY AUTO_INCREMENT,
+    Content					VARCHAR(6555) NOT NULL,
+    QuestionID				INT,
+    isCorrect				ENUM('ĐÚNG','SAI'),
+    CONSTRAINT fk_Question FOREIGN KEY (QuestionID) REFERENCES Question (QuestionID)
 );
-
--- Query tạo bảng tên là Exam
+-- Query tạo bảng 10 tên là Exam
+DROP TABLE IF EXISTS Exam;
 CREATE TABLE Exam (
-	Exam_id			INT PRIMARY KEY AUTO_INCREMENT,
-    `code`			VARCHAR(50),
-    tile			VARCHAR(255),
-    categogy_id		INT,
-    duration		DATETIME,
-    creator_id		INT,
-    create_date		DATE
-);
+	ExamID					INT PRIMARY KEY AUTO_INCREMENT,
+    Code					VARCHAR(50) NOT NULL,
+    Title					VARCHAR(255) NOT NULL,
+    CategoryID				INT,
+    Duration				DATETIME,
+    CreatorID				INT,
+    CreateDate				DATE,
+ CONSTRAINT fk_CategoryQuestion FOREIGN KEY (CategoryID) REFERENCES CategoryQuestion (CategoryID)
 
--- Query tạo bảng tên là ExamQuestion
+);
+-- Query tạo bảng 11 tên là ExamQuestion
+DROP TABLE IF EXISTS ExamQuestion;
 CREATE TABLE ExamQuestion (
-	exam_id			INT,
-    question_id		INT
+	ExamID					INT,
+    QuestionID				INT,
+    CONSTRAINT fk_Exam FOREIGN KEY (ExamID) REFERENCES Exam (ExamID),
+    CONSTRAINT fk_Questions FOREIGN KEY (QuestionID) REFERENCES Question (QuestionID)
 );
