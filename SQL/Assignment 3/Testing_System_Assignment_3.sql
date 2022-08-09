@@ -222,7 +222,7 @@ VALUES 	(1 , 5),
 		(7 , 2),
 		(8 , 10),
 		(9 , 9);
-USE Testing_System_Assignment_3;
+USE testingsystem;
 -- Question 2: lấy ra tất cả các phòng ban
 SELECT 		* 
 FROM 		`Department`;
@@ -235,9 +235,10 @@ SELECT 		*
 FROM		 `Account` 
 WHERE 		LENGTH(FullName)=(SELECT MAX(LENGTH(FullName)) FROM `Account`);
 -- Question 5: Lấy ra thông tin account có full name dài nhất và thuộc phòng ban có id = 3
+WITH CTE_DEP3 AS (SELECT * FROM `Account` WHERE DepartmentID ='3')
 SELECT		* 
-FROM 		`Account` 
-WHERE 		LENGTH(FullName)=(SELECT MAX(LENGTH(FullName)) FROM `Account`) AND DepartmentID ='3';
+FROM 		CTE_DEP3 
+WHERE 		LENGTH(FullName)=(SELECT MAX(LENGTH(FullName)) FROM CTE_DEP3) ;
 -- Question 6: Lấy ra tên group đã tham gia trước ngày 20/12/2019
 SELECT		GroupName
 FROM		`Group`
@@ -245,7 +246,7 @@ WHERE		CreateDate <'2019-12-20';
 -- Question 7: Lấy ra ID của question có >= 4 câu trả lời
 SELECT		QuestionID
 FROM		Answer
-WHERE		
+HAVING		COUNT(QuestionID) >=' 4';
 -- Question 8: Lấy ra các mã đề thi có thời gian thi >= 60 phút và được tạo trước ngày 20-12-2019
 SELECT		'Code'
 FROM		Exam
