@@ -66,6 +66,12 @@ HAVING		COUNT(A.PositionID) = (SELECT MIN(count_A) FROM(
 									SELECT COUNT(A.PositionID) AS count_A FROM `Account`
                                     GROUP BY A.PositionID) AS count_table);
 -- Question 11: Thống kê mỗi phòng ban có bao nhiêu dev, test, scrum master, PM
+SELECT		D.DepartmentID, D.DepartmentName, P.PositionName, COUNT(P.PositionName) AS sl
+FROM		`Account` A
+JOIN		Department D ON A.DepartmentID = D.DepartmentID
+JOIN		Position P ON A.PositionID = P.PositionID
+GROUP BY 	D.DepartmentID, P.PositionID
+ORDER BY	DepartmentID;
 -- Question 12: Lấy thông tin chi tiết của câu hỏi bao gồm: thông tin cơ bản của question, loại câu hỏi, ai là người tạo ra câu hỏi, câu trả lời là gì, ...
 SELECT		Q.Content, Q.CreateDate, CQ.CategoryName, TQ.TypeName, A.Content, A.isCorrect
 FROM		Question Q
