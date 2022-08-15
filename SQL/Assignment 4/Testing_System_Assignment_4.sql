@@ -58,7 +58,7 @@ GROUP BY	GA.GroupID
 ORDER BY	GA.GroupID;
 
 -- Question 10: Tìm chức vụ có ít người nhất
-SELECT		P.PositionID, P.PositionName, COUNT(A.PositionID) AS people
+SELECT		P.PositionID, P.PositionName, COUNT(A.PositionID) AS people 
 FROM		Position P
 JOIN		`Account` A ON P.PositionID = A.PositionID
 GROUP BY	A.PositionID
