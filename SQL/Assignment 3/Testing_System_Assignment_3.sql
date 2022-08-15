@@ -232,7 +232,7 @@ FROM		`Department`
 WHERE 		DepartmentName = 'SALE';
 -- Question 4: lấy ra thông tin account có full name dài nhất
 SELECT 		* 
-FROM		 `Account` 
+FROM		 `Account`  
 WHERE 		LENGTH(FullName)=(SELECT MAX(LENGTH(FullName)) FROM `Account`);
 -- Question 5: Lấy ra thông tin account có full name dài nhất và thuộc phòng ban có id = 3
 WITH CTE_DEP3 AS (SELECT * FROM `Account` WHERE DepartmentID ='3')
