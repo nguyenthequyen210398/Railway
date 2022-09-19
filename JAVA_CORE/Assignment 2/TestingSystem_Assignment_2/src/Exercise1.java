@@ -5,6 +5,9 @@ import entity.Position;
 
 import java.sql.SQLOutput;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Exercise1 {
     public static void main(String[] args) {
         // tạo Department
@@ -177,6 +180,127 @@ public class Exercise1 {
 
         }
     //FOREACH
+        List<Account> accounts = new ArrayList<>();
+        accounts.add(acc1);
+        accounts.add(acc2);
+        accounts.add(acc3);
+
+    //Question 8:
+        System.out.println("Question 8:");
+        for (Account acc : accounts) {
+            System.out.println("id:" + acc.id +  " Email:" + acc.email + " FullName:" + acc.fullName + "");
+        }
+        for (Account acc : accounts) {
+            System.out.println(acc.toString());
+        }
+
+    //Question 9:
+        System.out.println("Question 9");
+        List<Department> departments = new ArrayList<>();
+        departments.add(dep1);
+        departments.add(dep2);
+        departments.add(dep3);
+
+        for (Department dep : departments) {
+            System.out.println(dep.toString());
+        }
+        System.out.println("\n");
+        // sd FORI
+        System.out.println(" sử dụng FORI");
+        for (int i = 0; i < departments.size(); i++) {
+            System.out.println(departments.get(i).toString());
+
+        }
+    //Question 10:
+        System.out.println("Question 10:");
+        for (int i = 0; i < accounts.size(); i++) {
+            System.out.println("Thông tin account thứ " + (i + 1) + "là: " );
+            System.out.println(" Email: " + accounts.get(i).email);
+            System.out.println("Full name: " + accounts.get(i).fullName);
+            System.out.println("Phòng ban: " + accounts.get(i).department.name);
+            System.out.println("\n");
+        }
+        System.out.println("\n");
+    //Question 11:
+        System.out.println("Question 11:");
+        for (int i = 0; i < departments.size(); i++) {
+            System.out.println("Thông tin department thứ " + (i + 1) + "là: ");
+            System.out.println("Id: " + departments.get(i).id);
+            System.out.println("Name: " + departments.get(i).name);
+            System.out.println("\n");
+
+        }
+    //    Question 12:
+        System.out.println("Question 12:");
+        for (int i = 0; i < 2; i++) {
+            System.out.println("Thông tin department thứ " + (i + 1) + "là: ");
+            System.out.println("Id: " + departments.get(i).id);
+            System.out.println("Name: " + departments.get(i).name);
+            System.out.println("\n");
+
+        }
+    //Question 13:
+        System.out.println("Question 13:");
+        for (int i = 0; i < accounts.size(); i++) {
+            if (i != 1) {
+                System.out.println(" Thông tin account thứ " + (i +1) + "là: ");
+                System.out.println(" Email: " + accounts.get(i).email);
+                System.out.println("Full name: " + accounts.get(i).fullName);
+                System.out.println("Phòng ban: " + accounts.get(i).department.name);
+                System.out.println("\n");}
+        }
+
+    //Question 14:
+        System.out.println("Question 14:");
+        for (int i = 0; i < accounts.size(); i++) {
+            if (accounts.get(i).id < 4 ) {
+                System.out.println("Thông tin account thứ " + (i + 1) + " là: ");
+                System.out.println("Id: " + accounts.get(i).id);
+                System.out.println("Email: " + accounts.get(i).email);
+                System.out.println("Full name: " + accounts.get(i).fullName);
+                System.out.println("Phòng ban: " + accounts.get(i).department.name);
+                System.out.println("\n");
+            }
+
+        }
+    //Question 15:
+        System.out.println("Question 15:");
+        for (int i = 0; i <= 20 ; i++) {
+            if (i%2 ==0){
+                System.out.println(i);
+                System.out.println("\n");
+            }
+
+        }
+
+        //WHILE
+        //Question 16
+        System.out.println("Question 16");
+        int i = 0;
+        while (i < accounts.size()) {
+
+                System.out.println("Thông tin account thứ " + (i + 1) + "là: ");
+                System.out.println("Email: " + accounts.get(i).email);
+                System.out.println("Full name: " + accounts.get(i).userName);
+                System.out.println("Phòng ban: " + accounts.get(i).department.name);
+                System.out.println("\n");
+                i++;
+
+        }
+
+        //DO-WHILE
+        //Question 17:
+        System.out.println("Question 17:");
+        int i1 = 0;
+        do {
+            System.out.println("Thông tin account thứ " + (i1 + 1 ) + " là: ");
+            System.out.println("Email: " + accounts.get(i1).email);
+            System.out.println("Full name: " + accounts.get(i1).fullName);
+            System.out.println("Phòng ban: " + accounts.get(i1).department.name);
+            System.out.println("\n");
+            i1++;
+        }
+        while (i1 < accounts.size());
 
 
 
@@ -184,4 +308,5 @@ public class Exercise1 {
 
 
     }
+
 }

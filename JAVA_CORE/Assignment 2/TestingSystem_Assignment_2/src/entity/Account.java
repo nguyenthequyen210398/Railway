@@ -9,4 +9,15 @@ public class Account {
     public Position position;
     public LocalDate createDate;
     public Group[] groups;
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", userName='" + userName + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", department=" + department +
+                '}';
+    }
 }
